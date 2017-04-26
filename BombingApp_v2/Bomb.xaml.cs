@@ -19,9 +19,6 @@ namespace BombingApp_v2
 {
     public sealed partial class Bomb : UserControl
     {
-        /*
-        private Explosion {}
-        private DropTime {} */
         public double LocationX { get; set; }
         public double LocationY { get; set; }
 

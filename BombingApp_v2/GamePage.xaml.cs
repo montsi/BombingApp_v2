@@ -26,7 +26,7 @@ namespace BombingApp_v2
         private int Score { get; set; }         // Muuttuja pisteille
         private int TankCount { get; set; }     // Muuttujat tankkien, jalkaväen, ja pommien määrälle
         private int InfantryCount { get; set; } 
-        private int BombsLeft = 25;             
+        private int BombsLeft = 30;             
 
         private List<Bomb> bombs;               // Listat
         private List<Infantry> ukot;
@@ -63,7 +63,7 @@ namespace BombingApp_v2
 
             // ajastin tankeille
             tankTimer = new DispatcherTimer();
-            tankTimer.Interval = new TimeSpan(0, 0, 0, 4);
+            tankTimer.Interval = new TimeSpan(0, 0, 0, 6);
             tankTimer.Tick += TankTimer_Tick1;
             tankTimer.Start();
 
@@ -76,7 +76,7 @@ namespace BombingApp_v2
         private void UkkoTimer_Tick(object sender, object e)
         {
             // luodaan lisää jalkaväkeä, mikäli niitä ei ole luotu vielä 20:ta
-            if (InfantryCount < 20)
+            if (InfantryCount < 25)
             {
                 createInfantry();
             }
@@ -128,14 +128,9 @@ namespace BombingApp_v2
                 myCanvas.Children.Remove(tank);
             }
             removeT.Clear();
-            // jos kaikki pommit on käytetty asetetaan highscore ja pysäytetään ajastimet
+            // jos kaikki pommit on käytetty pysäytetään ajastimet
             if (BombsLeft == 0)
             {
-                if (App.Highscore < Score)
-                {
-                    App.Highscore = Score;
-                }
-
                 gameTimer.Stop();
                 ukkoTimer.Stop();
                 tankTimer.Stop();

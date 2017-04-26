@@ -10,6 +10,6 @@
     d:DesignWidth="400">
 
     <Grid>
-        <Image Source="Assets/flower.png" Width="40" Height="40"/>
+        <Image Source="Assets/ukko.gif" Width="40" Height="40"/>
     </Grid>
 </UserControl>

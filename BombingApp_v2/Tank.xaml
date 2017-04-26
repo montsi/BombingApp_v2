@@ -10,6 +10,6 @@
     d:DesignWidth="400">
 
     <Grid>
-        <Image Source="Assets/tank.png" Width="70" Height="70"/>
+        <Image Source="Assets/tankki.gif" Width="130" Height="57"/>
     </Grid>
 </UserControl>

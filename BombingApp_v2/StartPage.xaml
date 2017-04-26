@@ -7,25 +7,50 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="StartButton" Content="Start" 
-            Margin="458,0,452,28" 
+    <Grid Background="LightBlue">
+        <Button x:Name="StartButton" Content="Start" Foreground="White" 
+            Background="Green"
+            Margin="458,0,452,192" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
             Height="105" Width="370"  
             FontSize="48" 
             Click="OnStart"/>
-        <TextBlock Text="Bomb the sh**"
+        <Button x:Name="InstructionsButton" Content="Instructions" Foreground="White" 
+            Background="Gray"
+            Margin="458,0,452,42" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Height="105" Width="370"  
+            FontSize="48" 
+            Click="InstructionsButton_Click"/>
+        <TextBlock Text="DROP THE"
                HorizontalAlignment="Center" 
                VerticalAlignment="Top" 
-               Margin="0,53,0,0" TextWrapping="Wrap" 
+               Margin="519,84,539,0" TextWrapping="Wrap" 
                FontSize="48"/>
-        <TextBlock Text="out of them!!" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Top" 
-               Margin="0,103,0,0" 
-               TextWrapping="Wrap" 
-               FontSize="48"/>
+
+        <TextBlock x:Name="txt" Text="BOMB!!" Foreground="Red"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Margin="458,153,452,0" 
+                    TextWrapping="Wrap" 
+                    FontSize="100" Width="370" FontWeight="Bold">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="txt"  
+                             Storyboard.TargetProperty="Opacity"  
+                             From="1.0" To="0.0" Duration="0:0:1" AutoReverse="True"  
+                             RepeatBehavior="Forever"/>   
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -35,14 +60,14 @@
                    Grid.Column="0" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Top" 
-                   Margin="0,203,0,0" 
+                   Margin="0,310,9,0" 
                    TextWrapping="Wrap"  
                    FontSize="32"/>
             <TextBlock x:Name="HighScoreBlock" Text="0" 
                    Grid.Column="1" 
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Top" 
-                   Margin="0,203,0,0" 
+                   Margin="10,310,0,0" 
                    TextWrapping="Wrap"  
                    FontSize="32"/>
         </Grid>

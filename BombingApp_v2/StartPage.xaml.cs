@@ -31,5 +31,10 @@ namespace BombingApp_v2
         {
             this.Frame.Navigate(typeof(GamePage));
         }
+
+        private void InstructionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(InstructionPage));
+        }
     }
 }

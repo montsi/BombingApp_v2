@@ -25,12 +25,12 @@ namespace BombingApp_v2
         public Tank()
         {
             this.InitializeComponent();
-            Width = 70;
-            Height = 70;
+            Width = 130;
+            Height = 57;
         }
         public void Move()
         {
-            LocationX += 1;
+            LocationX += 6;
             SetLocation();
         }
 
@@ -38,7 +38,6 @@ namespace BombingApp_v2
         {
             SetValue(Canvas.LeftProperty, LocationX);
             SetValue(Canvas.TopProperty, LocationY);
-
         }
     }
 }

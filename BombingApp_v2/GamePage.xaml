@@ -7,16 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Width="1002.258">
 
-    <Grid x:Name="myGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="myGrid">
 
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="170,31,0,0" TextWrapping="Wrap" Text="Bombs:"  VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="240,31,0,0" TextWrapping="Wrap" Text="25"  VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="320,31,0,0" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="scoreBlock" HorizontalAlignment="Left" Margin="378,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="456,31,0,0" TextWrapping="Wrap" Text="HighScore:" VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="highscoreBlock" HorizontalAlignment="Left" Margin="556,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="20"/>
+        <Image Source="Assets/background.png"/>
 
-        <Grid HorizontalAlignment="Left" Height="100" Margin="151,63,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
+        <TextBlock x:Name="textBlock"  HorizontalAlignment="Left" Margin="170,22,0,0" TextWrapping="Wrap" Text="Bombs:"  VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="256,22,0,0" TextWrapping="Wrap" Text="25"  VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="316,22,0,0" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="scoreBlock" HorizontalAlignment="Left" Margin="388,22,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="456,22,0,0" TextWrapping="Wrap" Text="HighScore:" VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="highscoreBlock" HorizontalAlignment="Left" Margin="580,22,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="25"/>
+        
+
+        <!-- <Grid HorizontalAlignment="Left" Height="100" Margin="151,63,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="151,163,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="151,263,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="151,363,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
@@ -63,20 +66,39 @@
         <Grid HorizontalAlignment="Left" Height="100" Margin="751,263,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="751,363,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="751,463,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="751,563,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="751,563,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/> -->
 
         <Canvas x:Name="myCanvas" Width="1280" Height="720" Margin="-139,-10,-139,-10">
-            <Button 
+            <Button Foreground="White"
                 x:Name="backButton" 
-                Content="Back to menu" 
+                Content="BACK TO MENU" 
                 FontSize="20" 
                 Background="Red" 
                 Canvas.Left="790" Canvas.Top="22" Width="197" Height="36"
                 Click="backButton_Click"/>
         </Canvas>
-        <Rectangle Fill="#FFFFFF" HorizontalAlignment="Left" Height="600" Margin="-518,63,0,0" VerticalAlignment="Top" Width="669"/>
-        <Rectangle Fill="#FFFFFF" HorizontalAlignment="Left" Height="600" Margin="851,63,-523,0" VerticalAlignment="Top" Width="674"/>
+        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="720" Margin="-518,0,0,0" VerticalAlignment="Top" Width="669"/>
+        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="720" Margin="851,0,-523,0" VerticalAlignment="Top" Width="674"/>
 
+        <TextBlock x:Name="warningTxt" Text="INCOMING!!" Foreground="Red"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Margin="206,268,199,0" 
+                    TextWrapping="Wrap" 
+                    FontSize="100" Width="597" FontWeight="Bold">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="warningTxt"  
+                             Storyboard.TargetProperty="Opacity"  
+                             From="1.0" To="0.0" Duration="0:0:2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
 
     </Grid>
 </Page>
