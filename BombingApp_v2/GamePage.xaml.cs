@@ -22,133 +22,78 @@ namespace BombingApp_v2
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class GamePage : Page
-    {
-        
-        // private int Level { get; set; } // Player level 
-        private int Score { get; set; } // Game score
-        private int TankCount { get; set; }
-        private int InfantryCount { get; set; }
-        private int BombsLeft = 25;
+    { 
+        private int Score { get; set; }         // Muuttuja pisteille
+        private int TankCount { get; set; }     // Muuttujat tankkien, jalkaväen, ja pommien määrälle
+        private int InfantryCount { get; set; } 
+        private int BombsLeft = 25;             
 
-        private List<Bomb> bombs;
+        private List<Bomb> bombs;               // Listat
         private List<Infantry> ukot;
         private List<Tank> tanks;
 
-        private DispatcherTimer gameTimer;
+        private DispatcherTimer gameTimer;      // Ajastimet
         private DispatcherTimer ukkoTimer;
         private DispatcherTimer tankTimer;
 
         public GamePage()
         {
             this.InitializeComponent();
-
+            // Ikkunan koko käynnistyksessä
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
-            // create lists
+            // luodaan listat
             bombs = new List<Bomb>();
             ukot = new List<Infantry>();
             tanks = new List<Tank>();
 
-            // create first enemies
+            // luodaan ensimmäiset viholliset
             createInfantry();
             createTank();
 
-            // mouse listener
+            // hiiren kuuntelu/tunnistus
             Window.Current.CoreWindow.PointerPressed += CoreWindow_PointerPressed;
 
-            // timer for ukko
+            // ajastin jalkaväelle
             ukkoTimer = new DispatcherTimer();
             ukkoTimer.Interval = new TimeSpan(0, 0, 0, 1);
             ukkoTimer.Tick += UkkoTimer_Tick;
             ukkoTimer.Start();
 
-            // timer for tank
+            // ajastin tankeille
             tankTimer = new DispatcherTimer();
             tankTimer.Interval = new TimeSpan(0, 0, 0, 4);
             tankTimer.Tick += TankTimer_Tick1;
             tankTimer.Start();
 
-            // Game loop timer
+            // peliajastin
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             gameTimer.Tick += GameTimer_Tick1;
             gameTimer.Start();
-
-
         }
-
-        private void TankTimer_Tick1(object sender, object e)
-        {
-            if (TankCount < 5)
-            {
-                createTank();
-            }
-        }
-
-        private void CoreWindow_PointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs args)
-        {
-            if (BombsLeft > 0)
-            {
-                Bomb bomb = new Bomb();
-                bomb.LocationX = args.CurrentPoint.Position.X - bomb.Width / 2;
-                bomb.LocationY = args.CurrentPoint.Position.Y - bomb.Width / 2;
-                // add to canvas
-                myCanvas.Children.Add(bomb);
-                bomb.SetLocation();
-                // add bombs list
-                bombs.Add(bomb);
-                BombsLeft--;
-                bombsBlock.Text = BombsLeft.ToString();
-                CheckCollision(bomb);
-            }
-            else { gameTimer.Stop(); ukkoTimer.Stop(); tankTimer.Stop(); }
-
-        }
-
         private void UkkoTimer_Tick(object sender, object e)
         {
+            // luodaan lisää jalkaväkeä, mikäli niitä ei ole luotu vielä 20:ta
             if (InfantryCount < 20)
             {
                 createInfantry();
             }
         }
-
-        private void createInfantry()
+        private void TankTimer_Tick1(object sender, object e)
         {
-            Infantry ukko = new Infantry()
+            // luodaan lisää jalkaväkeä, mikäli viittä ei ole luotu vielä
+            if (TankCount < 5)
             {
-                LocationY = myCanvas.Height / 2
-            };
-            Random random = new Random();
-            ukko.LocationY = random.Next(50, 720 - 100);
-            ukko.SetLocation();
-            ukot.Add(ukko);
-            myCanvas.Children.Add(ukko);
-            InfantryCount++;
+                createTank();
+            }
         }
-
-        private void createTank()
-        {
-            Tank tank = new Tank()
-            {
-                LocationY = myCanvas.Height / 2
-            };
-            Random random = new Random();
-            tank.LocationY = random.Next(50, 720 - 100);
-            tank.SetLocation();
-            tanks.Add(tank);
-            myCanvas.Children.Add(tank);
-            TankCount++;
-        }
-
-
         private void GameTimer_Tick1(object sender, object e)
         {
-
+            // poistolista jalkaväelle
             List<Infantry> remove = new List<Infantry>();
-
-            // move ukko
+            // siirretään jalkaväki poistolistalle, mikäli ylittää pisteen X >= 1000
             foreach (Infantry ukko in ukot)
             {
                 ukko.Move();
@@ -157,17 +102,17 @@ namespace BombingApp_v2
                     remove.Add(ukko);
                 }
             }
-            // remove all
+            // poistetaan kaikki poistolistalla olevat
             foreach (Infantry ukko in remove)
             {
                 ukot.Remove(ukko);
                 myCanvas.Children.Remove(ukko);
-                // Debug.WriteLine("poistuu");
             }
             remove.Clear();
 
+            // poistolista tankeille
             List<Tank> removeT = new List<Tank>();
-            // move ukko
+            // siirretään tankki poistolistalle, mikäli ylittää pisteen X >= 1000
             foreach (Tank tank in tanks)
             {
                 tank.Move();
@@ -176,93 +121,131 @@ namespace BombingApp_v2
                     removeT.Add(tank);
                 }
             }
-            // remove all
+            // poistetaan kaikki poistolistalla olevat
             foreach (Tank tank in removeT)
             {
                 tanks.Remove(tank);
                 myCanvas.Children.Remove(tank);
-                // Debug.WriteLine("poistuu tämäki");
             }
             removeT.Clear();
-
+            // jos kaikki pommit on käytetty asetetaan highscore ja pysäytetään ajastimet
             if (BombsLeft == 0)
             {
-                // scoreBlock.Text = Score.ToString();
-                if (Score > App.Highscore)
+                if (App.Highscore < Score)
                 {
                     App.Highscore = Score;
-                    highscoreBlock.Text = Score.ToString();
                 }
-            }
 
+                gameTimer.Stop();
+                ukkoTimer.Stop();
+                tankTimer.Stop();
+            }
+        }
+
+        private void CoreWindow_PointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs args)
+        {
+            // jos kaikkia pommeja ei ole käytetty luodaan lisää hiirenpainalluksella, vähennetään käytettävien määrästä ja tarkistetaan osuma
+            if (BombsLeft > 0)
+            {
+                Bomb bomb = new Bomb();
+                bomb.LocationX = args.CurrentPoint.Position.X - bomb.Width / 2;
+                bomb.LocationY = args.CurrentPoint.Position.Y - bomb.Width / 2;
+                myCanvas.Children.Add(bomb);
+                bomb.SetLocation();
+                bombs.Add(bomb);
+                BombsLeft--;
+                bombsBlock.Text = BombsLeft.ToString();
+                CheckCollision(bomb);
+            }
+        }
+
+        private void createInfantry()
+        {
+            // jalkaväen luontikoodi - sijoitetaan satunnaisesti ja kasvatetaan jalkaväen määrä -muuttujaa
+            Infantry ukko = new Infantry();
+            Random random = new Random();
+            ukko.LocationY = random.Next(50, 720 - 120);
+            ukko.SetLocation();
+            ukot.Add(ukko);
+            myCanvas.Children.Add(ukko);
+            InfantryCount++;
+        }
+
+        private void createTank()
+        {
+            // tankkien luontikoodi - sijoitetaan satunnaisesti ja kasvatetaan jalkaväen määrä -muuttujaa
+            Tank tank = new Tank();
+            Random random = new Random();
+            tank.LocationY = random.Next(50, 720 - 100);
+            tank.SetLocation();
+            tanks.Add(tank);
+            myCanvas.Children.Add(tank);
+            TankCount++;
         }
 
         private void CheckCollision(Bomb bomb)
         {
-            // Debug.WriteLine("testii");
-
-            // loop bomb list
             foreach (Infantry ukko in ukot)
             {
-                // get rects
+                // haetaan pommin ja jalkaväen alueet
                 Rect BRect = new Rect(
                     bomb.LocationX, bomb.LocationY, bomb.ActualWidth, bomb.ActualHeight
                     );
                 Rect IRect = new Rect(
                     ukko.LocationX, ukko.LocationY, ukko.ActualWidth, ukko.ActualHeight
                     );
-                // does objects intersect
-
-                //Debug.WriteLine(IRect);
-                //Debug.WriteLine(BRect);
-
+                // tarkastetaan alueiden yhteenosuma
                 BRect.Intersect(IRect);
 
                 if (!BRect.IsEmpty)
                 {
-                    // collision! area not empty
-                    // remove ukko from canvas
+                    // osuma tapahtui - poistetaan jalkaväki - lisätään pisteitä
                     myCanvas.Children.Remove(ukko);
-                    // remove from list
                     ukot.Remove(ukko);
                     Score += 50;
                     scoreBlock.Text = Score.ToString();
-
+                    if (Score > App.Highscore)
+                    {
+                        App.Highscore = Score;
+                        highscoreBlock.Text = Score.ToString();
+                    }
                     // play audio
                     //mediaElement.Play();
-
                     break;
                 }
             }
 
             foreach (Tank tank in tanks)
             {
-                // get rects
+                // haetaan pommin ja tankin alueet
                 Rect BRect = new Rect(
                     bomb.LocationX, bomb.LocationY, bomb.ActualWidth, bomb.ActualHeight
                     );
                 Rect TRect = new Rect(
                     tank.LocationX, tank.LocationY, tank.ActualWidth, tank.ActualHeight
                     );
-                // does objects intersect
-
-                //Debug.WriteLine(TRect);
-                //Debug.WriteLine(BRect);
-
+                // tarkastetaan alueiden yhteenosuma
                 BRect.Intersect(TRect);
 
                 if (!BRect.IsEmpty)
                 {
-                    // collision! area not empty
-                    // remove ukko from canvas
+                    // osuma tapahtui - poistetaan tankki - lisätään pisteitä
                     myCanvas.Children.Remove(tank);
-                    // remove from list
                     tanks.Remove(tank);
                     Score += 30;
+                    if (Score > App.Highscore)
+                    {
+                        App.Highscore = Score;
+                        highscoreBlock.Text = Score.ToString();
+                    }
                     break;
                 }
             }
         }
-        
+        // takaisin aloitussivulle painikkeella
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StartPage));
+        }
     }
 }

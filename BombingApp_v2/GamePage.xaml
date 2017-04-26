@@ -10,7 +10,7 @@
     <Grid x:Name="myGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="170,31,0,0" TextWrapping="Wrap" Text="Bombs:"  VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="240,31,0,0" TextWrapping="Wrap" Text="30"  VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="240,31,0,0" TextWrapping="Wrap" Text="25"  VerticalAlignment="Top" FontSize="20"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="320,31,0,0" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Top" FontSize="20"/>
         <TextBlock x:Name="scoreBlock" HorizontalAlignment="Left" Margin="378,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="20"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="456,31,0,0" TextWrapping="Wrap" Text="HighScore:" VerticalAlignment="Top" FontSize="20"/>
@@ -66,7 +66,13 @@
         <Grid HorizontalAlignment="Left" Height="100" Margin="751,563,0,0" Background="LightGray" BorderBrush="Aquamarine" BorderThickness="1 1 1 1" VerticalAlignment="Top" Width="100"/>
 
         <Canvas x:Name="myCanvas" Width="1280" Height="720" Margin="-139,-10,-139,-10">
-            <Button x:Name="backButton" Content="Back to menu" FontSize="20" Background="Red" Canvas.Left="790" Canvas.Top="22" Width="197" Height="36"/>
+            <Button 
+                x:Name="backButton" 
+                Content="Back to menu" 
+                FontSize="20" 
+                Background="Red" 
+                Canvas.Left="790" Canvas.Top="22" Width="197" Height="36"
+                Click="backButton_Click"/>
         </Canvas>
         <Rectangle Fill="#FFFFFF" HorizontalAlignment="Left" Height="600" Margin="-518,63,0,0" VerticalAlignment="Top" Width="669"/>
         <Rectangle Fill="#FFFFFF" HorizontalAlignment="Left" Height="600" Margin="851,63,-523,0" VerticalAlignment="Top" Width="674"/>
