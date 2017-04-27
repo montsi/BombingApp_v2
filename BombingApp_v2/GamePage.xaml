@@ -12,7 +12,7 @@
         <Image Source="Assets/background.png"/>
 
         <TextBlock x:Name="textBlock"  HorizontalAlignment="Left" Margin="170,22,0,0" TextWrapping="Wrap" Text="Bombs:"  VerticalAlignment="Top" FontSize="25"/>
-        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="256,22,0,0" TextWrapping="Wrap" Text="25"  VerticalAlignment="Top" FontSize="25"/>
+        <TextBlock x:Name="bombsBlock" HorizontalAlignment="Left" Margin="256,22,0,0" TextWrapping="Wrap" Text="30"  VerticalAlignment="Top" FontSize="25"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="316,22,0,0" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Top" FontSize="25"/>
         <TextBlock x:Name="scoreBlock" HorizontalAlignment="Left" Margin="388,22,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="25"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="456,22,0,0" TextWrapping="Wrap" Text="HighScore:" VerticalAlignment="Top" FontSize="25"/>

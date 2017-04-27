@@ -57,20 +57,6 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Highscore:" 
-                   Grid.Column="0" 
-                   HorizontalAlignment="Right" 
-                   VerticalAlignment="Top" 
-                   Margin="0,310,9,0" 
-                   TextWrapping="Wrap"  
-                   FontSize="32"/>
-            <TextBlock x:Name="HighScoreBlock" Text="0" 
-                   Grid.Column="1" 
-                   HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="10,310,0,0" 
-                   TextWrapping="Wrap"  
-                   FontSize="32"/>
         </Grid>
         <Canvas x:Name="LayoutRoot">
             <Canvas.Resources>
