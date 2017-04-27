@@ -77,9 +77,9 @@
                 Canvas.Left="790" Canvas.Top="22" Width="197" Height="36"
                 Click="backButton_Click"/>
         </Canvas>
-        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="720" Margin="-518,0,0,0" VerticalAlignment="Top" Width="669"/>
-        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="720" Margin="851,0,-523,0" VerticalAlignment="Top" Width="674"/>
 
+        <Image Source="Assets/Etusivu-Tausta.png" Margin="-1188,-466,861,-477" />
+        <Image Source="Assets/Etusivu-Tausta.png" Margin="861,-466,-1188,-477" />
         <TextBlock x:Name="warningTxt" Text="INCOMING!!" Foreground="Red"
                     TextAlignment="Center"
                     HorizontalAlignment="Center" 

@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="LightBlue">
+        <Image Source="Assets/Etusivu-Tausta.png"/>
         <Button x:Name="StartButton" Content="Start" Foreground="White" 
             Background="Green"
             Margin="458,0,452,192" 

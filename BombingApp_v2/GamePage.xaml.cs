@@ -197,7 +197,7 @@ namespace BombingApp_v2
                     // osuma tapahtui - poistetaan jalkaväki - lisätään pisteitä
                     myCanvas.Children.Remove(ukko);
                     ukot.Remove(ukko);
-                    Score += 50;
+                    Score += 30;
                     scoreBlock.Text = Score.ToString();
                     if (Score > App.Highscore)
                     {
@@ -227,7 +227,7 @@ namespace BombingApp_v2
                     // osuma tapahtui - poistetaan tankki - lisätään pisteitä
                     myCanvas.Children.Remove(tank);
                     tanks.Remove(tank);
-                    Score += 30;
+                    Score += 50;
                     if (Score > App.Highscore)
                     {
                         App.Highscore = Score;

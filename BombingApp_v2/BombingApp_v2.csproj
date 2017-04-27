@@ -124,6 +124,7 @@
   <ItemGroup>
     <Content Include="Assets\background.png" />
     <Content Include="Assets\Bomb.gif" />
+    <Content Include="Assets\Etusivu-Tausta.png" />
     <Content Include="Assets\flower.png" />
     <Content Include="Assets\tankki.gif" />
     <Content Include="Assets\tankki.png" />

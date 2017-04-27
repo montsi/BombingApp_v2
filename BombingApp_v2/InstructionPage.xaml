@@ -7,9 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="LightBlue">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="82,187,82,0" TextWrapping="Wrap" 
-                   Text="This game is easy. Just bomb the enemies but notice that the amount of bombs is limited. The game will end after the final bomb is dropped." 
+    <Grid>
+        <Image Source="Assets/Etusivu-Tausta.png" Opacity="3"/>
+        <Rectangle Fill="Gray" Opacity="0.8" HorizontalAlignment="Left" Height="231" Margin="62,187,0,0" VerticalAlignment="Top" Width="1157"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="82,187,82,0" TextWrapping="Wrap"
+                   Foreground="White"
+                   Text="This game is easy. Just bomb the enemies but notice that the amount of bombs is limited to 30 (same amount as the enemies). Killing infantry unit will give you 30pts and tank unit gives 50pts. The game will end after the final bomb is dropped." 
                    VerticalAlignment="Top" FontSize="40" Height="258" Width="1116"/>
         <Button x:Name="BackButton" Content="Back to menu" Foreground="White" 
             Background="Gray"
@@ -19,5 +22,6 @@
             Height="105" Width="370"  
             FontSize="48" 
             Click="BackButton_Click"/>
+
     </Grid>
 </Page>
